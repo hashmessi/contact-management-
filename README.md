@@ -390,6 +390,7 @@ contact-management-/
 
 ## 🚀 Future Enhancements
 
+- [ ] **Depolyment**: Production ready CRUD appliaction 
 - [ ] **Advanced Search**: Filter by multiple criteria simultaneously
 - [ ] **Contact Groups/Tags**: Organize contacts with custom categories
 - [ ] **Export Functionality**: Export contacts to CSV/PDF
