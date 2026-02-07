@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - ZENVIO{% endblock %}
+
+{% block content %}
+<section class="auth-section" style="min-height: calc(100vh - 80px); display: flex; align-items: center; padding: 120px 0 80px; background: linear-gradient(135deg, var(--pastel-lavender) 0%, var(--pastel-pink) 50%, var(--pastel-peach) 100%);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="form-card">
+                    <div class="text-center mb-4">
+                        <div class="auth-icon mx-auto mb-3" style="width: 64px; height: 64px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-person-plus-fill text-white fs-3"></i>
+                        </div>
+                        <h2 class="mb-2">Create Account</h2>
+                        <p class="text-muted">Join ZENVIO and start managing contacts</p>
+                    </div>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        {% for field in form %}
+                        <div class="mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                            <div class="text-danger small mt-1">
+                                {% for error in field.errors %}{{ error }}{% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn-primary-custom justify-content-center">
+                                <i class="bi bi-person-plus"></i>
+                                Create Account
+                            </button>
+                        </div>
+                        
+                        <p class="text-center mt-4 mb-0">
+                            Already have an account? 
+                            <a href="{% url 'accounts:login' %}" style="color: var(--accent-primary); text-decoration: none; font-weight: 600;">Login</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

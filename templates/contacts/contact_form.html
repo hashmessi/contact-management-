@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }} - ZENVIO{% endblock %}
+
+{% block content %}
+<section class="contact-form-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="form-card">
+                    <div class="text-center mb-4">
+                        <div class="auth-icon mx-auto mb-3" style="width: 64px; height: 64px; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-person-{% if 'Edit' in title %}gear{% else %}plus-fill{% endif %} text-white fs-3"></i>
+                        </div>
+                        <h2 class="mb-2">{{ title }}</h2>
+                        <p class="text-muted">{% if 'Edit' in title %}Update contact information{% else %}Add a new contact to your list{% endif %}</p>
+                    </div>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="row g-3">
+                            {% for field in form %}
+                            <div class="{% if field.name == 'notes' %}col-12{% else %}col-md-6{% endif %}">
+                                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                <div class="text-danger small mt-1">
+                                    {% for error in field.errors %}{{ error }}{% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="d-flex gap-3 justify-content-center mt-4">
+                            <a href="{% url 'contacts:contact_list' %}" class="btn-secondary-custom">
+                                <i class="bi bi-arrow-left"></i>
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn-primary-custom">
+                                <i class="bi bi-check-circle"></i>
+                                {{ button_text }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

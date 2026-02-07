@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ contact.name }} - ZENVIO{% endblock %}
+
+{% block content %}
+<section class="contact-detail-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="form-card contact-detail-card">
+                    <!-- Header -->
+                    <div class="d-flex align-items-center gap-4 mb-4 pb-4 border-bottom">
+                        <div class="contact-avatar-lg">
+                            {{ contact.name|slice:":1"|upper }}
+                        </div>
+                        <div>
+                            <h2 class="mb-1">{{ contact.name }}</h2>
+                            {% if contact.company %}
+                            <p class="text-muted mb-0"><i class="bi bi-building me-2"></i>{{ contact.company }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Information -->
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="contact-info-box">
+                                <label class="text-muted small d-block mb-1">Phone Number</label>
+                                <a href="tel:{{ contact.phone }}" class="fs-5 contact-link">
+                                    <i class="bi bi-telephone me-2 text-accent"></i>
+                                    {{ contact.phone }}
+                                </a>
+                            </div>
+                        </div>
+                        
+                        {% if contact.email %}
+                        <div class="col-md-6">
+                            <div class="contact-info-box">
+                                <label class="text-muted small d-block mb-1">Email Address</label>
+                                <a href="mailto:{{ contact.email }}" class="fs-5 contact-link">
+                                    <i class="bi bi-envelope me-2 text-accent"></i>
+                                    {{ contact.email }}
+                                </a>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    {% if contact.notes %}
+                    <div class="mb-4">
+                        <label class="text-muted small d-block mb-2">Notes</label>
+                        <div class="contact-info-box">
+                            {{ contact.notes|linebreaks }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Timestamps -->
+                    <div class="text-muted small mb-4">
+                        <p class="mb-1"><i class="bi bi-clock me-2"></i>Created: {{ contact.created_at|date:"F j, Y, g:i a" }}</p>
+                        <p class="mb-0"><i class="bi bi-arrow-repeat me-2"></i>Updated: {{ contact.updated_at|date:"F j, Y, g:i a" }}</p>
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="d-flex gap-3 pt-4 border-top">
+                        <a href="{% url 'contacts:contact_list' %}" class="btn-secondary-custom">
+                            <i class="bi bi-arrow-left"></i>
+                            Back to List
+                        </a>
+                        <a href="{% url 'contacts:contact_update' contact.pk %}" class="btn-primary-custom">
+                            <i class="bi bi-pencil"></i>
+                            Edit Contact
+                        </a>
+                        <a href="{% url 'contacts:contact_delete' contact.pk %}" class="btn btn-outline-danger" style="padding: var(--space-md) var(--space-xl); border-radius: var(--radius-full);">
+                            <i class="bi bi-trash"></i>
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

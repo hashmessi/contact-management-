@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Contact - ZENVIO{% endblock %}
+
+{% block content %}
+<section class="delete-section" style="min-height: calc(100vh - 80px); display: flex; align-items: center; padding: 120px 0 80px; background: var(--off-white);">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="form-card text-center">
+                    <div class="delete-icon mx-auto mb-4" style="width: 80px; height: 80px; background: #FFE5E5; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;">
+                        <i class="bi bi-exclamation-triangle fs-1" style="color: #DC3545;"></i>
+                    </div>
+                    
+                    <h3 class="mb-3">Delete Contact?</h3>
+                    <p class="text-muted mb-4">
+                        Are you sure you want to delete <strong>{{ contact.name }}</strong>? 
+                        This action cannot be undone.
+                    </p>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex gap-3 justify-content-center">
+                            <a href="{% url 'contacts:contact_list' %}" class="btn-secondary-custom">
+                                <i class="bi bi-x-circle"></i>
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-danger" style="padding: var(--space-md) var(--space-xl); border-radius: var(--radius-full); font-weight: 600;">
+                                <i class="bi bi-trash"></i>
+                                Yes, Delete
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
