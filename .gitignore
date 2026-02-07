@@ -5,11 +5,12 @@ __pycache__/
 venv/
 ENV/
 env/
-.env
 
 # Django
 db.sqlite3
 *.log
+staticfiles/
+staticfiles_build/
 
 # IDEs
 .vscode/
@@ -18,3 +19,6 @@ db.sqlite3
 # OS
 .DS_Store
 Thumbs.db
+
+# Vercel
+.vercel
